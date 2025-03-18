@@ -1,0 +1,69 @@
+# General parameters
+output_dir: '../logs/' #Output directory
+data_folder: 'data' #Data directory
+save_all: False
+optimal: True #while true, use optimal adjustment, false will use parent adjustment
+
+# Data generation
+### DATA GEN from generate_data.py ###
+# possible_mechanisms = ["linear", "sigmoid_add", "sigmoid_mix"]
+# possible_causes = ["gmm_cause","gaussian","variable_gaussian","uniform","uniform_positive"]
+# possible_noises = ["gaussian","variable_gaussian","uniform","laplace","absolute_gaussian","nn"]
+mechanism: "sigmoid_add" # Type of mechanism use to generate the data
+initial_cause: "gaussian" # Distribution of initial causes
+noise: "gaussian" # Distribution of noises
+noise_coeff: 0.1 # Noise coefficient
+nb_nodes: 10 # Number of nodes in the DAGs
+prob_connection: 0.6 # Probability of connection between two nodes.
+nb_dag: 1 # Number of DAGs to generate dataset from
+nb_points: 5000 # Number of points per dataset
+rescale: False # Rescale the variables
+suffix: None # Suffix that will be added at the end of the folder name, if None, the suffix will be the same as mechanism
+seed_data: 170 # Seed for the data generation
+
+sure_prob: 0.3
+forbid_prob: 0.3
+
+xy_connected: True # if selected x,y are random, are they directly connected or not
+# xy_connected being false doesn't mean the variables are not conencted, 
+# just that x and y are not enforced to be connected. So might be connected or not.
+sure_and_forbidden_how: 'random' # 'random' or 'pc' for the sure and forbidden edges
+# 'random' randomly select sure and forbidden edges based on sure_prob and forbid_prob
+# 'pc' use causal discovery as first step to get sure and forbidden edges
+
+xy_position: 'random' # 'last', 'random' or 'chosen' for the position of x and y
+# 'last' two variables as x and y
+# 'random' x and y are randomly chosen among [n_var / 2, n_var]
+# 'chosen' x and y are chosen. give as array [x,y]. xy can't be None if xy_position is 'chosen'
+xy: None # if not None, x and y are fixed. give as array [x,y]
+
+# Lagrangian parameters
+linear_or_nonlinear_lag: 'linear' # 'linear' or 'nonlinear'
+n_rounds_lag: 30 #Number of rounds of optimization
+opt_steps_lag: 30 #Number of optimization steps for each round
+lr_lag: 0.3 #Learning rate for the Lagrangian optimization
+constr_type: 'equality' # 'inequality' or 'equality'
+lam_init: 2 #Aug Lagrangian param
+slack: 1 #Aug Lagrangian param
+tau_init: 0.1 #Aug Lagrangian param
+tau_max: 4 #Aug Lagrangian param
+gamma: 1.2 #Aug Lagrangian param
+eta_min: 0.1
+eta_init: 0.2
+acyc_constr: dogma # original, alternate or dogma
+soft_A: True #True or False
+seed_lagrangian: 5514
+
+# Probabilistic DAG parameters
+n_rounds_prob: 30 #Number of rounds of optimization
+opt_steps_prob: 30 #Number of optimization steps for each round
+order_type: sinkhorn
+lr_prob: 0.0001
+seed_prob: 0
+
+init_temp: 1 #initial temperature for Gumbel softmax
+temp_decay: 0.9997 #temperature decay For Gumbel softmax
+
+########### PC ############
+test: 'fisher' #"kci" or "fisher"
+n_permutations: 10 #number of permutations

@@ -1,0 +1,35 @@
+output_dir: '../runs/'
+save_all: True
+optimal: True
+#### Data generation ####
+n_sample: 5000
+n_var: 5
+sure_prob: 0.2
+forbid_prob: 0.6
+b: 2 #range of parameter beta [-b,b]
+r: 2 #range of root nodes [-r,r]
+noise: 0.1 #range of gaussian noise [-n,n]
+seed_data: 7865
+graph_type: 'default'
+init_temp: 1 #initial temperature for Gumbel softmax
+temp_decay: 0.9997 #temperature decay For Gumbel softmax
+
+xy_connected: True # if selected x,y are random, are they directly connected or not
+# xy_connected being false doesn't mean the variables are not conencted, 
+# just that x and y are not enforced to be connected. So might be connected or not.
+sure_and_forbidden_how: 'random' # 'random' or 'pc' for the sure and forbidden edges
+# 'random' randomly select sure and forbidden edges based on sure_prob and forbid_prob
+# 'pc' use causal discovery as first step to get sure and forbidden edges
+
+xy_position: 'random' # 'last', 'random' or 'chosen' for the position of x and y
+# 'last' two variables as x and y
+# 'random' x and y are randomly chosen among [n_var / 2, n_var]
+# 'chosen' x and y are chosen. give as array [x,y]. xy can't be None if xy_position is 'chosen'
+xy: None # if not None, x and y are fixed. give as array [x,y]
+
+#### PROB DAG ####
+n_rounds_prob: 200 #Number of rounds of optimization
+opt_steps_prob: 30 #Number of optimization steps for each round
+order_type: sinkhorn
+lr_prob: 0.0001
+seed_prob: 10

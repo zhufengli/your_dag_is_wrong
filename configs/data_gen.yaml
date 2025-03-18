@@ -1,0 +1,18 @@
+### DATA GEN from generate_data.py ###
+data_folder: "data"
+mechanism: "linear" # Type of mechanism use to generate the data
+initial_cause: "gaussian" # Distribution of initial causes
+noise: "gaussian" # Distribution of noises
+noise_coeff: 0.1 # Noise coefficient
+nb_nodes: 5 # Number of nodes in the DAGs
+prob_connection: 0.7 # Probability of connection between two nodes.
+nb_dag: 1 # Number of DAGs to generate dataset from
+nb_points: 5000 # Number of points per dataset
+rescale: False # Rescale the variables
+suffix: None # Suffix that will be added at the end of the folder name, if None, the suffix will be the same as mechanism
+
+###
+# possible_mechanisms = ["linear","polynomial","sigmoid_add","sigmoid_mix","gp_add","gp_mix",
+#                                "anm","nn","nn_add","pnl_gp_mechanism","pnl_mult_mechanism","post_nonlinear","x","circle","adn"]
+# possible_causes = ["gmm_cause","gaussian","variable_gaussian","uniform","uniform_positive"]
+# possible_noises = ["gaussian","variable_gaussian","uniform","laplace","absolute_gaussian","nn"]
